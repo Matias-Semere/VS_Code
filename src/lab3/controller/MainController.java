@@ -1,10 +1,8 @@
 package lab3.controller;
 
+import javax.swing.*;
 import lab3.clock.WeekAlarmClock;
 import lab3.view.*;
-
-import javax.swing.*;
-import java.awt.*;
 
 public class MainController {
 
@@ -15,7 +13,7 @@ public class MainController {
     public MainController(WeekAlarmClock connector, MainFrame MF) {
         WAC = connector;
         view = MF;
-        tid = new Timer(1000, _ -> {WAC.tickTack(); view.refresh();});
+        tid = new Timer(1000, e -> {WAC.tickTack(); view.refresh();});
     }
     
     public void startTime() {

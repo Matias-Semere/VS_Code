@@ -1,9 +1,7 @@
 package lab3.view;
 
-import javax.swing.*;
 import java.awt.*;
-
-import lab3.time.*;
+import javax.swing.*;
 import lab3.controller.AlarmController;
 
 public class AlarmsAndButtons extends JPanel {
@@ -28,7 +26,7 @@ public class AlarmsAndButtons extends JPanel {
 
     void creatButtons() {
         
-        add.addActionListener(_ -> {
+        add.addActionListener(e -> {
             // TimeType tid = new Time(0,0,10,0);
             // con.addAlarm(tid);
             // listan.add(new JLabel(con.getAlarm(tid)));
@@ -37,7 +35,7 @@ public class AlarmsAndButtons extends JPanel {
         });
 
 
-        remove.addActionListener(_ -> {
+        remove.addActionListener(e -> {
             // TimeType tid = new Time(0,0,10,0);
             // con.removeAlarm(tid);
             // listan.add(new JLabel(con.getAlarm(tid)));
