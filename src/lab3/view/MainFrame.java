@@ -17,7 +17,7 @@ public class MainFrame extends JFrame {
         this.mainc = mainc;
         this.alarmc = alarmc;
         this.clockc = clockc;
-        // mainc.setView(this);
+        mainc.setView(this);
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(800, 600);
@@ -31,7 +31,10 @@ public class MainFrame extends JFrame {
         add(new AnalogClock(), BorderLayout.WEST);
         add(AAB, BorderLayout.CENTER);
         add(CAB, BorderLayout.SOUTH);
-
     }    
 
+    public void refresh() {
+        revalidate();
+        repaint();
+    }
 }

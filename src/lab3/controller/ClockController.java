@@ -11,6 +11,7 @@ public class ClockController {
 
     WeekAlarmClock WAC;
     Timer tid;
+    Runnable attGöra = () -> {};
 
     public ClockController(WeekAlarmClock connector) {
         WAC = connector;
@@ -33,7 +34,15 @@ public class ClockController {
     }
 
     public void startClock() {
-        WAC.startTick();   
+        WAC.startTick();
+    }
+
+    public void resetClock() {
+        WAC.setTime(new Time(0, 0, 0, 0));
+    }
+
+    public void test(Runnable Detta) {
+        attGöra = Detta;
     }
 
 }
