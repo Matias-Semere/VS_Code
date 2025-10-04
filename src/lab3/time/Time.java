@@ -5,7 +5,7 @@ import java.util.regex.*;
 
 public class Time implements TimeType {
   private int second, minute, hour, day;
-  private static final String[] dayNames = { "Måndag", "Tisdag", "Onsdag", "Torsdag", "Fredag", "Lördag", "Söndag" };
+  private static final String[] dayNames = { "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun" };
   private boolean hasDay = false;
 
   public Time(int hour, int minute, int second) {

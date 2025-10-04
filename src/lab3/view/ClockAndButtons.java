@@ -11,14 +11,17 @@ public class ClockAndButtons extends JPanel{
 
     public ClockAndButtons(ClockController alarmc) {
         con = alarmc;
-        setBackground(Color.gray);
+        setBackground(Color.darkGray);
         setForeground(Color.WHITE);
         setPreferredSize(new Dimension(400, 200));
+        setLayout(new BorderLayout());
+
         JLabel label = new JLabel(con.toString());
         JButton start = new JButton("Start");
         JButton stop = new JButton("Stop");
+        JPanel panel = new JPanel();
         
-        label.getFont().deriveFont(Font.BOLD, 50);
+        label.setFont(new Font("Arial", Font.BOLD, 50));
         label.setForeground(Color.white);
 
         con.görDetta(() -> {
@@ -35,9 +38,11 @@ public class ClockAndButtons extends JPanel{
             con.stopClock();
         });
 
-        add(start);
-        add(stop);        
-        add(label);
+        panel.add(start, BorderLayout.WEST);
+        panel.add(stop, BorderLayout.EAST);        
+        add(panel, BorderLayout.NORTH);
+        label.setHorizontalAlignment(SwingConstants.CENTER);
+        add(label, BorderLayout.CENTER);
     } 
 
 }
