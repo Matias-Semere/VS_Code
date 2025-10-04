@@ -13,6 +13,8 @@ public class App {
         AlarmController alarmc = new AlarmController(clock);
         ClockController clockc = new ClockController(clock);
 
+        System.out.println("App started");
+
         SwingUtilities.invokeLater(() -> new MainFrame(mainc, alarmc, clockc).setVisible(true));
     }
 }
