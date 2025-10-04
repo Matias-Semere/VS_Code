@@ -13,7 +13,7 @@ public class MainController {
     public MainController(WeekAlarmClock connector, MainFrame MF) {
         WAC = connector;
         view = MF;
-        tid = new Timer(1000, e -> {WAC.tickTack(); view.refresh();});
+        tid = new Timer(1000, e -> {WAC.tickTack();});
     }
     
     public void startTime() {

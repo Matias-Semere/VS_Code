@@ -16,9 +16,6 @@ public class MainFrame extends JFrame {
     AlarmsAndButtons AAB;
     ClockAndButtons CAB;
 
-    JPanel panel = new JPanel();
-
-    String[] dagar = {"Måndag", "Tisdag", "Onsdag", "Torsdag", "Fredag", "Lördag", "Söndag"};
 
     public MainFrame(WeekAlarmClock connector) {
         mainc = new MainController(connector, this);
@@ -28,23 +25,17 @@ public class MainFrame extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(800, 600);
         setLocationRelativeTo(null);
-        // setBackground(Color.ORANGE);
         setLayout(new BorderLayout());
+        mainc.startTime();
 
         AAB = new AlarmsAndButtons(alarmc);
         CAB = new ClockAndButtons(clockc);
-        add(new AnalogClock(), BorderLayout.WEST);
 
-        add(AAB, BorderLayout.NORTH);
-        add(CAB, BorderLayout.EAST);
-        add(panel, BorderLayout.CENTER);
-        mainc.startTime();
+        add(new AnalogClock(), BorderLayout.WEST);
+        add(AAB, BorderLayout.CENTER);
+        add(CAB, BorderLayout.SOUTH);
+
     }
     
-    public void refresh() {
-        CAB.add(new JLabel(clockc.toString()));
-    }
-
-
 
 }

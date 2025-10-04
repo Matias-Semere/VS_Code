@@ -73,7 +73,7 @@ public class Time implements TimeType {
 
   public String toString() {
     return hasDay 
-      ? String.format("%s %s%s %02d:%02d:%02d", "Det är", dayNames[day], "! Klockan är",  hour, minute, second)
+      ? String.format("%s %02d:%02d:%02d", dayNames[day], hour, minute, second)
       : String.format("%02d:%02d:%02d", hour, minute, second);
   }
 }

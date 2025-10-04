@@ -16,6 +16,10 @@ public class ClockController {
         WAC = connector;
     }
 
+    public void görDetta(Runnable Detta) {
+        WAC.skaGöraEfterNotis(Detta);
+    }
+
     public void setTime(int hour, int minute, int second, int day) {
         WAC.setTime(new Time(day ,hour, minute, second));
     }
@@ -24,8 +28,12 @@ public class ClockController {
         return WAC.toString();
     }
 
+    public void stopClock() {
+        WAC.stopTick();   
+    }
 
-
-    
+    public void startClock() {
+        WAC.startTick();   
+    }
 
 }

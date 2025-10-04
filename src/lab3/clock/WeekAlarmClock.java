@@ -14,9 +14,24 @@ public class WeekAlarmClock implements AlarmClockType  {
     
     AlarmManager alarman = new AlarmManager();
 
+    Runnable attGöra = () -> {};
+
+    public void skaGöraEfterNotis(Runnable vadSkaGöras) {
+        attGöra = vadSkaGöras;
+    }
+
     public void tickTack() {
         second.count();
         alarman.checkForAlarm(getTime());
+        attGöra.run();
+    }
+
+    public void stopTick() {
+        second.pause();
+    }
+
+    public void startTick() {
+        second.resume();
     }
 
     public void setTime(TimeType time) {
