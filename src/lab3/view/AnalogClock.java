@@ -23,12 +23,31 @@ public class AnalogClock extends JPanel {
         int size = Math.min(w, h) - 20;
         int cx = w / 2, cy = h / 2;
         int r = size / 2;
+
+        int b = 45;
+        int a = (int) (Math.sin(Math.toRadians(b)) * r);
         
         g2d.setStroke(new BasicStroke(10));
         g2d.drawOval(cx - r, cy - r, size, size);
         g2d.fillOval(cx - 3, cy - 3, 10, 10);  
         
-        g2d.setStroke(new BasicStroke(2));
-        g2d.drawLine(cx+2, 0, cx+2, h);
+        
+        g2d.setStroke(new BasicStroke(5));
+        g2d.setColor(Color.RED);
+        // g2d.drawLine(cx, cy, size-40, size-40);
+        g2d.drawLine(cx, cy, a, a);
+        b += 45;
+        a = (int) (Math.sin(Math.toRadians(b)));
+        g2d.drawLine(cx, cy, a, a);
+        // g2d.drawLine(cx, cy, c, b);
+        // g2d.drawLine(cx, cy, d, b);
+        // g2d.drawLine(cx, cy, a, d);
+
+        // g2d.setStroke(new BasicStroke(2));
+        // g2d.drawLine(cx+2, 0, cx+2, h);
+    }
+
+    public void getloc() {
+
     }
 }

@@ -2,12 +2,17 @@ package lab3.model;
 
 import javax.swing.SwingUtilities;
 import lab3.clock.WeekAlarmClock;
+import lab3.controller.*;
 import lab3.view.*;
 
 public class App {
     public static void main(String[] args) {
         WeekAlarmClock clock = new WeekAlarmClock();
 
-        SwingUtilities.invokeLater(() -> new MainFrame(clock).setVisible(true));
+        MainController mainc = new MainController(clock);
+        AlarmController alarmc = new AlarmController(clock);
+        ClockController clockc = new ClockController(clock);
+
+        SwingUtilities.invokeLater(() -> new MainFrame(mainc, alarmc, clockc).setVisible(true));
     }
 }

@@ -75,19 +75,5 @@ public class Time implements TimeType {
     return hasDay 
       ? String.format("%s %02d:%02d:%02d", dayNames[day], hour, minute, second)
       : String.format("%02d:%02d:%02d", hour, minute, second);
-    // char[] array = new char[12];
-    // array[0] = dayNames[day].charAt(0);
-    // array[1] = dayNames[day].charAt(1);
-    // array[2] = dayNames[day].charAt(2);
-    // array[3] = ' ';
-    // array[4] = (char) ('0' + hour / 10);
-    // array[5] = (char) ('0' + hour % 10);
-    // array[6] = ':';
-    // array[7] = (char) ('0' + minute / 10);
-    // array[8] = (char) ('0' + minute % 10);
-    // array[9] = ':';
-    // array[10] = (char) ('0' + second / 10);
-    // array[11] = (char) ('0' + second % 10);
-    // return new String(array);
   }
 }

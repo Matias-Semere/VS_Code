@@ -2,10 +2,7 @@ package lab3.view;
 
 import java.awt.*;
 import javax.swing.*;
-
 import lab3.controller.*;
-import lab3.clock.*;
-// import lab3.time.*;
 
 public class MainFrame extends JFrame {
 
@@ -16,11 +13,11 @@ public class MainFrame extends JFrame {
     AlarmsAndButtons AAB;
     ClockAndButtons CAB;
 
-
-    public MainFrame(WeekAlarmClock connector) {
-        mainc = new MainController(connector, this);
-        clockc = new ClockController(connector);
-        alarmc = new AlarmController(connector);
+    public MainFrame(MainController mainc, AlarmController alarmc, ClockController clockc) {
+        this.mainc = mainc;
+        this.alarmc = alarmc;
+        this.clockc = clockc;
+        // mainc.setView(this);
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(800, 600);
@@ -35,7 +32,6 @@ public class MainFrame extends JFrame {
         add(AAB, BorderLayout.CENTER);
         add(CAB, BorderLayout.SOUTH);
 
-    }
-    
+    }    
 
 }

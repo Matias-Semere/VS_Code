@@ -2,7 +2,7 @@ package lab3.controller;
 
 import lab3.clock.*;
 import lab3.time.*;
-import lab3.view.*;
+// import lab3.view.*;
 
 import javax.swing.*;
 
