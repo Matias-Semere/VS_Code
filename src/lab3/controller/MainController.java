@@ -12,10 +12,10 @@ public class MainController {
 
     public MainController(WeekAlarmClock connector) {
         WAC = connector;
-        tid = new Timer(1000, e -> {WAC.tickTack(); view.refresh();});
     }
     public void setView(MainFrame view) {
         this.view = view;
+        tid = new Timer(1000, e -> {WAC.tickTack(); view.repaintCAB();});
     }
 
     public void startTime() {
@@ -29,8 +29,5 @@ public class MainController {
     public String toString() {
        return WAC.toString();
     }
-    
-    
-
-    
+        
 }

@@ -1,5 +1,6 @@
 package lab3.clock;
 
+import java.util.*;
 import java.util.Collection;
 
 import lab3.alarm.*;
@@ -11,19 +12,17 @@ public class WeekAlarmClock implements AlarmClockType  {
     SettableCounterType hour = new Counter24(day);
     SettableCounterType minute = new Counter60(hour);
     SettableCounterType second = new Counter60(minute);
-    
     AlarmManager alarman = new AlarmManager();
 
-    Runnable attGöra = () -> {};
+    List<Runnable> attGöraListan = new ArrayList<>();
 
-    public void skaGöraEfterNotis(Runnable vadSkaGöras) {
-        attGöra = vadSkaGöras;
+    public void läggTillListan(Runnable vadSkaGöras) {
+        attGöraListan.add(vadSkaGöras);
     }
 
     public void tickTack() {
         second.count();
-        alarman.checkForAlarm(getTime());
-        attGöra.run();
+        attGöraListan.forEach(a -> a.run());
     }
 
     public void stopTick() {

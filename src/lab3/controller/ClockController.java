@@ -2,7 +2,6 @@ package lab3.controller;
 
 import lab3.clock.*;
 import lab3.time.*;
-// import lab3.view.*;
 
 import javax.swing.*;
 
@@ -11,14 +10,13 @@ public class ClockController {
 
     WeekAlarmClock WAC;
     Timer tid;
-    Runnable attGöra = () -> {};
 
     public ClockController(WeekAlarmClock connector) {
         WAC = connector;
     }
 
-    public void görDetta(Runnable Detta) {
-        WAC.skaGöraEfterNotis(Detta);
+    public void SkickaVidare(Runnable jobb) {
+        WAC.läggTillListan(jobb);
     }
 
     public void setTime(int hour, int minute, int second, int day) {
@@ -26,8 +24,6 @@ public class ClockController {
     }
     
     public String toString() {
-        // String s = WAC.toString();
-        attGöra.run();
         return WAC.toString();
     }
 
@@ -42,9 +38,4 @@ public class ClockController {
     public void resetClock() {
         WAC.setTime(new Time(0, 0, 0, 0));
     }
-
-    public void test(Runnable Detta) {
-        attGöra = Detta;
-    }
-
 }

@@ -4,8 +4,6 @@ import javax.swing.*;
 
 import lab3.controller.ClockController;
 
-// import lab3.controller.ClockController;
-
 import java.awt.*;
 
 public class AnalogClock extends JPanel {
@@ -47,14 +45,11 @@ public class AnalogClock extends JPanel {
         g2d.setStroke(new BasicStroke(5));
         g2d.setColor(Color.RED);
         
-        // clockc.görDetta(() -> changeClock(g2d, cy, cx));
-        clockc.test(() -> changeClock(g2d, cy, cx));
-        
+        clockc.SkickaVidare(() -> changeClock(g2d, cy, cx));
     }
     
     public void changeClock(Graphics2D g2d, int cy, int cx) {
         g2d.dispose();
-        // System.out.println("changeClock");
         g2d.drawLine(cx+2, cy, xs , ys+25);
         s += 10;
         s2 += 10;

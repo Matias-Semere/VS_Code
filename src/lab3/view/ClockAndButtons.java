@@ -25,7 +25,7 @@ public class ClockAndButtons extends JPanel{
         label.setFont(new Font("Arial", Font.BOLD, 50));
         label.setForeground(Color.white);
 
-        con.görDetta(() -> {
+        con.SkickaVidare(() -> {
             label.setText(con.toString());
             label.repaint();
         });

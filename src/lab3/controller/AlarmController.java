@@ -1,14 +1,13 @@
 package lab3.controller;
 
-import lab3.clock.*;
-
 import java.util.*;
 
+import lab3.clock.*;
 import lab3.alarm.*;
 import lab3.time.*;
 
 public class AlarmController {
-    
+
     WeekAlarmClock WAC;
 
     public AlarmController(WeekAlarmClock connector) {
@@ -16,15 +15,15 @@ public class AlarmController {
     }
 
     public void görDetta(Runnable Detta) {
-        WAC.skaGöraEfterNotis(Detta);
+        WAC.läggTillListan(Detta);
     }
 
     public void addAlarm(TimeType tid) {
-        WAC.addAlarm(new Alarm(tid));   
+        WAC.addAlarm(new Alarm(tid));
     }
 
     public void removeAlarm(TimeType tid) {
-        WAC.removeAlarm(new Alarm(tid));   
+        WAC.removeAlarm(new Alarm(tid));
     }
 
     public void removeAllAlarms() {
@@ -36,21 +35,37 @@ public class AlarmController {
     }
 
     public AlarmType getAlarm(TimeType tid) {
-        if(getAlarms().size() == 0) System.out.println("Inget i alarm listan");
+        if (getAlarms().size() == 0);
         else {
             for (AlarmType ettAlarm : getAlarms()) {
-                if(ettAlarm.toString().equals(tid.toString())) return ettAlarm;
+                if (ettAlarm.toString().equals(tid.toString()))
+                    return ettAlarm;
             }
         }
         return null;
     }
 
-    public void setActive(AlarmType alarm, boolean aktiv) {
-        if(alarm != null) alarm.setActive(aktiv);
+    public void setActive(TimeType tid, boolean aktiv) {
+        AlarmType alarm = getAlarm(tid);
+        if (alarm != null)
+            getAlarm(tid).setActive(aktiv);
     }
 
     public boolean isActive(AlarmType alarm) {
-        if(alarm != null) return alarm.isActive();
+        if (alarm != null)
+            return alarm.isActive();
+        return false;
+    }
+
+    public String toString(AlarmType alarm) {
+        return isActive(alarm) ? " Aktiv" : " Inaktiv";
+    }
+
+    public boolean checkIfAlarm() {
+        if (getAlarm(WAC.getTime()) != null) {
+            if (isActive(getAlarm(WAC.getTime())))
+            return true;
+        }
         return false;
     }
 

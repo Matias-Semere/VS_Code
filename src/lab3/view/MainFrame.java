@@ -17,24 +17,25 @@ public class MainFrame extends JFrame {
         this.mainc = mainc;
         this.alarmc = alarmc;
         this.clockc = clockc;
+        AAB = new AlarmsAndButtons(alarmc);
+        CAB = new ClockAndButtons(clockc);
         mainc.setView(this);
+        mainc.startTime();
 
+
+        setLayout(new BorderLayout());
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(800, 600);
         setLocationRelativeTo(null);
-        setLayout(new BorderLayout());
-        mainc.startTime();
-
-        AAB = new AlarmsAndButtons(alarmc);
-        CAB = new ClockAndButtons(clockc);
 
         add(new AnalogClock(clockc), BorderLayout.WEST);
         add(AAB, BorderLayout.CENTER);
         add(CAB, BorderLayout.SOUTH);
     }    
 
-    public void refresh() {
-        revalidate();
-        repaint();
+    public void repaintCAB() {
+        CAB.revalidate();
+        CAB.repaint();
     }
+
 }
