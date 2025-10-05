@@ -28,7 +28,7 @@ public class MainFrame extends JFrame {
         AAB = new AlarmsAndButtons(alarmc);
         CAB = new ClockAndButtons(clockc);
 
-        add(new AnalogClock(), BorderLayout.WEST);
+        add(new AnalogClock(clockc), BorderLayout.WEST);
         add(AAB, BorderLayout.CENTER);
         add(CAB, BorderLayout.SOUTH);
     }    

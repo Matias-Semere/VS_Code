@@ -13,7 +13,7 @@ public class ClockAndButtons extends JPanel{
         con = alarmc;
         setBackground(Color.darkGray);
         setForeground(Color.WHITE);
-        setPreferredSize(new Dimension(400, 200));
+        setPreferredSize(new Dimension(400, 100));
         setLayout(new BorderLayout());
 
         JLabel label = new JLabel(con.toString());
@@ -26,6 +26,7 @@ public class ClockAndButtons extends JPanel{
         label.setForeground(Color.white);
 
         con.görDetta(() -> {
+            label.setText(con.toString());
             label.repaint();
         });
 

@@ -26,6 +26,8 @@ public class ClockController {
     }
     
     public String toString() {
+        // String s = WAC.toString();
+        attGöra.run();
         return WAC.toString();
     }
 
