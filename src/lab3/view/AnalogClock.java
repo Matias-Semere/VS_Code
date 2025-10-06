@@ -44,12 +44,15 @@ public class AnalogClock extends JPanel {
         g2d.fillOval(cx - 3, cy - 3, 10, 10);  
         g2d.setStroke(new BasicStroke(5));
         g2d.setColor(Color.RED);
+        // changeClock(g2d, cy, cx);
         
-        clockc.SkickaVidare(() -> changeClock(g2d, cy, cx));
+        // clockc.SkickaVidare(() -> changeClock(g2d, cy, cx));
     }
     
     public void changeClock(Graphics2D g2d, int cy, int cx) {
-        g2d.dispose();
+        // g2d.dispose();
+        System.out.println("ChangeClock");
+        g2d.drawOval(cx/2, cy/2, 200, 200);
         g2d.drawLine(cx+2, cy, xs , ys+25);
         s += 10;
         s2 += 10;

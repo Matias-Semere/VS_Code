@@ -1,6 +1,8 @@
 package lab3.view;
 
 import java.awt.*;
+import java.time.LocalDateTime;
+
 import javax.swing.*;
 import lab3.controller.*;
 
@@ -19,9 +21,10 @@ public class MainFrame extends JFrame {
         this.clockc = clockc;
         AAB = new AlarmsAndButtons(alarmc);
         CAB = new ClockAndButtons(clockc);
+        
         mainc.setView(this);
         mainc.startTime();
-
+        mainc.setTime(mainc.getRealTime());
 
         setLayout(new BorderLayout());
         setDefaultCloseOperation(EXIT_ON_CLOSE);
