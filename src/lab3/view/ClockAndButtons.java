@@ -12,13 +12,16 @@ public class ClockAndButtons extends JPanel {
     ClockController con;
     JPanel combopanel = new JPanel();
     JPanel butonspanel = new JPanel();
-    JComboBox<String> dag = new JComboBox<String>();
     JComboBox<Integer> tim, min, sek;
     String[] dagar = { "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun" };
+    JComboBox<String> dag = new JComboBox<String>(dagar);
 
     public ClockAndButtons(ClockController alarmc) {
         con = alarmc;
-        setBackground(Color.darkGray);
+        setBackground(Color.BLACK);
+
+        
+
         setForeground(Color.WHITE);
         setLayout(new BorderLayout());
 
@@ -60,7 +63,10 @@ public class ClockAndButtons extends JPanel {
         butonspanel.add(reset);
         butonspanel.add(set);
         butonspanel.add(creatOptions(), BorderLayout.EAST);
-        add(butonspanel, BorderLayout.SOUTH);
+
+        // combopanel.setBackground(Color.BLACK);
+
+        add(butonspanel, BorderLayout.NORTH);
         add(label, BorderLayout.CENTER);
     } 
 
@@ -69,7 +75,6 @@ public class ClockAndButtons extends JPanel {
         tim = new JComboBox<Integer>();
         min = new JComboBox<Integer>();
         sek = new JComboBox<Integer>();
-        IntStream.range(0, 7).forEach(i -> dag.addItem(dagar[i]));
         IntStream.range(0, 24).forEach(i -> tim.addItem(i));
         IntStream.range(0, 60).forEach(i -> min.addItem(i));
         IntStream.range(0, 60).forEach(i -> sek.addItem(i));

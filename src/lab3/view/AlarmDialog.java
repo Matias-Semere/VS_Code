@@ -32,7 +32,6 @@ public class AlarmDialog extends JDialog {
         closeButton.setForeground(Color.BLACK);
         closeButton.setFont(new Font("Arial", Font.BOLD, 30));
         panel.add(closeButton, BorderLayout.SOUTH);
-
         add(panel);
 
         setSize(300, 150);
