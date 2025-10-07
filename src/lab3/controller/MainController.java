@@ -19,12 +19,7 @@ public class MainController {
 
     public TimeType getRealTime() {
         LocalDateTime a = WAC.realTime();
-        int[] split = new int[4];
-        split[0] = a.getDayOfMonth() + 1 % 7;
-        split[1] = a.getHour();
-        split[2] = a.getMinute();
-        split[3] = a.getSecond();
-        return new Time(split[0], split[1], split[2], split[3]);
+        return new Time(a.getDayOfMonth() + 1 % 7, a.getHour(), a.getMinute(), a.getSecond());
     }
 
     public  void setTime(TimeType time) {

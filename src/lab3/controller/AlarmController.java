@@ -30,14 +30,14 @@ public class AlarmController {
         WAC.removeAllAlarms();
     }
 
-    public Collection<AlarmType> getAlarms() {
+    public Collection<AlarmType> getAlarmsFromWAC() {
         return WAC.getAlarms();
     }
 
     public AlarmType getAlarm(TimeType tid) {
-        if (getAlarms().size() == 0);
+        if (getAlarmsFromWAC().size() == 0);
         else {
-            for (AlarmType ettAlarm : getAlarms()) {
+            for (AlarmType ettAlarm : getAlarmsFromWAC()) {
                 if (ettAlarm.toString().equals(tid.toString()))
                     return ettAlarm;
             }

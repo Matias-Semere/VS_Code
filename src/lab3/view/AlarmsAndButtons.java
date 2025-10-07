@@ -20,13 +20,13 @@ public class AlarmsAndButtons extends JPanel {
     JButton set = new JButton("Set Aktive / Inaktive");
     JPanel combopanel = new JPanel();
     JPanel butonspanel = new JPanel();
-    String style = "<html> <style> h1 {font-size: 25px; color: green; font-weight: bold; border: 4px solid black;} div {display: flex; padding: 10px; justify-content: center; text-align: center; align-items: center; width: 100%;}</style> <div> <h1>";
+    String style = "<html> <style> h1 {font-size: 25px; color: green; font-weight: bold; border: 4px solid black;} div {display: flex; padding: 10px; justify-content: center; text-align: center; align-items: center; width: 100%; padding-left: 20px}</style> <div> <h1>";
 
     DefaultListModel<String> listan;
     JList<String> listan2;
     JScrollPane listanscroll;
 
-    JPanel panel = new JPanel();
+    JPanel actions = new JPanel();
     JScrollPane scrollPane;
 
     JComboBox<String> dag = new JComboBox<String>();
@@ -40,37 +40,36 @@ public class AlarmsAndButtons extends JPanel {
         con = alarmc;
         setLayout(new BorderLayout());
         setBackground(Color.ORANGE);
-        setPreferredSize(new Dimension(400, 200));
 
         listan = new DefaultListModel<>(); // Det man kan klicka på
         listan2 = new JList<>(listan); // En lista på de man kan klicka pp
         listanscroll = new JScrollPane(listan2); // Den vissar listan
 
-        creatOptions();
+        
         creatButtons();
-
         add(listanscroll, BorderLayout.CENTER);
     }
 
-    public void creatButtons() {
-        listanscroll.setPreferredSize(new Dimension(400, 200));
+    private void creatButtons() {
+        
+        // butonspanel.setPreferredSize(getPreferredSize());
 
         con.görDetta(() -> {
             this.repaint();
             this.revalidate();
             if (con.checkIfAlarm())
-                new AlarmDialog();
+            new AlarmDialog();
         });
 
         add.addActionListener(e -> {
-            TimeType tid = new Time(dag.getSelectedIndex(), tim.getSelectedIndex(), min.getSelectedIndex(),
-                    sek.getSelectedIndex());
+            TimeType tid = new Time(dag.getSelectedIndex(), tim.getSelectedIndex(), min.getSelectedIndex(), sek.getSelectedIndex());
+
             if (con.getAlarm(tid) == null) {
                 con.addAlarm(tid);
                 
                 String b = tid.toString() + con.toString(new Alarm(tid));
 
-                listan.addElement(style  + b );
+                listan.addElement(style  + b);
             }
         });
 
@@ -94,13 +93,15 @@ public class AlarmsAndButtons extends JPanel {
             listan.setElementAt(ändrasTill, listan2.getSelectedIndex());
         });
 
-        butonspanel.add(set);
         butonspanel.add(add);
         butonspanel.add(remove);
-        this.add(butonspanel, BorderLayout.SOUTH);
+        butonspanel.add(set);
+        butonspanel.add(creatOptions(), BorderLayout.EAST);
+
+        this.add(butonspanel, BorderLayout.NORTH);
     }
 
-    public void creatOptions() {
+    private JPanel creatOptions() {
         IntStream.range(0, 7).forEach(i -> dag.addItem(dagar[i]));
         IntStream.range(0, 24).forEach(i -> tim.addItem(i));
         IntStream.range(0, 60).forEach(i -> min.addItem(i));
@@ -109,6 +110,6 @@ public class AlarmsAndButtons extends JPanel {
         combopanel.add(tim);
         combopanel.add(min);
         combopanel.add(sek);
-        this.add(combopanel, BorderLayout.NORTH);
+        return combopanel;
     }
 }

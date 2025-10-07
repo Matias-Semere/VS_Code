@@ -21,6 +21,7 @@ public class AnalogClock extends JPanel {
         
         setBackground(Color.DARK_GRAY);
         setPreferredSize(new Dimension(400, 400));
+        // setSize(400, 400);
     }
     protected void paintComponent(Graphics g) {
         super.paintComponent(g); // Always call this first!
