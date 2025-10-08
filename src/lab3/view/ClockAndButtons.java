@@ -63,8 +63,8 @@ public class ClockAndButtons extends JPanel {
         butonspanel.add(reset);
         butonspanel.add(set);
         butonspanel.add(creatOptions(), BorderLayout.EAST);
-
-        // combopanel.setBackground(Color.BLACK);
+        butonspanel.setBackground(Color.BLACK);
+        
 
         add(butonspanel, BorderLayout.NORTH);
         add(label, BorderLayout.CENTER);

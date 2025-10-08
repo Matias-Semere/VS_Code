@@ -26,16 +26,15 @@ public class AlarmsAndButtons extends JPanel {
     JList<String> listan2;
     JScrollPane listanscroll;
 
-    String style = "<html><style> h1 {font-size: 25px; color: green; font-weight: bold; border: 4px solid black;} div {display: flex; padding: 10px; justify-content: center; text-align: center; align-items: center; width: 100%; padding-left: 50px}</style> <div> <h1>";
+    String style = "<html><style> h1 {font-size: 25px; padding: 5px; color: green; font-weight: bold; border: 4px solid black;} div {display: flex; padding: 10px; justify-content: center; text-align: center; align-items: center; width: 100%; padding-left: 130px}</style> <div> <h1>";
     String[] dagar = { "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun" };
     JComboBox<String> dag = new JComboBox<String>(dagar);
     JComboBox<Integer> tim, min, sek;
 
     public AlarmsAndButtons(AlarmController alarmc) {
         con = alarmc;
-        setPreferredSize(new Dimension(550, 100));
+        // setPreferredSize(new Dimension(600, 100));
         setLayout(new BorderLayout());
-        setBackground(Color.ORANGE);
 
         listan = new DefaultListModel<>(); // Det man kan klicka på
         listan2 = new JList<>(listan); // En lista på de man kan klicka pp
@@ -44,8 +43,6 @@ public class AlarmsAndButtons extends JPanel {
         actions.setLayout(new FlowLayout());
 
         creatButtons();
-        listanscroll.setBackground(Color.ORANGE);
-        listanscroll.setForeground(Color.BLACK);
         add(listanscroll);
     }
 
@@ -81,6 +78,11 @@ public class AlarmsAndButtons extends JPanel {
             }
         });
 
+        removeAll.addActionListener(e -> {
+            con.removeAllAlarms();
+            listan.clear();
+        });
+
         set.addActionListener(e -> {
             String temp = listan2.getSelectedValue();
             String[] str = temp.substring(temp.indexOf("<h1>") + 4, temp.indexOf("</h1>")).split(" ");
@@ -95,6 +97,7 @@ public class AlarmsAndButtons extends JPanel {
 
         butonspanel.add(add);
         butonspanel.add(remove);
+        butonspanel.add(removeAll);
         butonspanel.add(set);
 
         actions.add(butonspanel, BorderLayout.WEST);

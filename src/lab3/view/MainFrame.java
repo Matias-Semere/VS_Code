@@ -28,23 +28,19 @@ public class MainFrame extends JFrame {
 
         setLayout(new GridLayout(1, 2));
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(1000, 800);
+        setSize(800, 600);
         setLocationRelativeTo(null);
-        setAlwaysOnTop(true);
 
         JTabbedPane tabbedPane = new JTabbedPane();
-        JTabbedPane tabbedPan2 = new JTabbedPane();
 
         tabbedPane.addTab("Dgital", CAB);
         tabbedPane.addTab("Clock", new AnalogClock(clockc));
-        tabbedPane.setBackground(Color.ORANGE);
-        
-        tabbedPan2.addTab("Alarm", AAB);
+        tabbedPane.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         
         add(tabbedPane);
-        // add(tabbedPan2, BorderLayout.EAST);
         add(AAB);
 
+        pack();
     }    
 
     public void repaintCAB() {

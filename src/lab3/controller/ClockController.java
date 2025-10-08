@@ -6,13 +6,34 @@ import lab3.time.*;
 import javax.swing.*;
 
 
-public class ClockController {
+public class ClockController extends MainController {
 
     WeekAlarmClock WAC;
     Timer tid;
 
     public ClockController(WeekAlarmClock connector) {
+        super(connector);
         WAC = connector;
+    }
+    
+    public void startClock() {
+        WAC.startTick();
+    }
+
+    public void stopClock() {
+        WAC.stopTick();   
+    }
+    
+    public String toString() {
+        return WAC.toString();
+    }
+    
+    public TimeType getTime() {
+        return WAC.getTime();
+    }
+
+    public void resetClock() {
+        super.setTime(super.getRealTime());
     }
 
     public void SkickaVidare(Runnable jobb) {
@@ -21,21 +42,5 @@ public class ClockController {
 
     public void setTime(int day, int hour, int minute, int second) {
         WAC.setTime(new Time(day ,hour, minute, second));
-    }
-    
-    public String toString() {
-        return WAC.toString();
-    }
-
-    public void stopClock() {
-        WAC.stopTick();   
-    }
-
-    public void startClock() {
-        WAC.startTick();
-    }
-
-    public void resetClock() {
-        WAC.setTime(new Time(0, 0, 0, 0));
     }
 }
