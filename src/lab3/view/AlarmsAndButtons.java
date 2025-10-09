@@ -2,6 +2,9 @@ package lab3.view;
 
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.TitledBorder;
+
 import java.util.stream.IntStream;
 
 import lab3.alarm.Alarm;
@@ -19,31 +22,43 @@ public class AlarmsAndButtons extends JPanel {
     JButton removeAll = new JButton("Remove All");
     JButton set = new JButton("Set Aktive / Inaktive");
     JPanel combopanel = new JPanel();
-    JPanel butonspanel = new JPanel();  
+    JPanel butonspanel = new JPanel();
     JPanel actions = new JPanel();
 
     DefaultListModel<String> listan;
     JList<String> listan2;
     JScrollPane listanscroll;
 
-    String style = "<html><style> h1 {font-size: 25px; padding: 5px; color: green; font-weight: bold; border: 4px solid black;} div {display: flex; padding: 10px; justify-content: center; text-align: center; align-items: center; width: 100%; padding-left: 130px}</style> <div> <h1>";
+    String style = "<html><style> h1 {font-size: 25px; padding: 5px; color: green; font-weight: bold; border: 4px solid black;} div {display: flex; padding: 10px; justify-content: center; text-align: center; align-items: center; width: 100%; padding-left: 110px}</style> <div> <h1>";
     String[] dagar = { "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun" };
     JComboBox<String> dag = new JComboBox<String>(dagar);
     JComboBox<Integer> tim, min, sek;
 
     public AlarmsAndButtons(AlarmController alarmc) {
         con = alarmc;
-        // setPreferredSize(new Dimension(600, 100));
         setLayout(new BorderLayout());
+        setBackground(new Color(30, 30, 30));
+        actions.setLayout(new FlowLayout());
 
         listan = new DefaultListModel<>(); // Det man kan klicka på
         listan2 = new JList<>(listan); // En lista på de man kan klicka pp
         listanscroll = new JScrollPane(listan2); // Den vissar listan
 
-        actions.setLayout(new FlowLayout());
+        Border titledBorder = BorderFactory.createTitledBorder(
+                BorderFactory.createLineBorder(
+                new Color(255, 255, 255)),
+                "Alarms",
+                TitledBorder.LEFT,
+                TitledBorder.TOP,
+                new Font("Segoe UI", Font.BOLD, 12)
+        );
 
-        creatButtons();
+        Border emptyBorder = BorderFactory.createEmptyBorder(20, 20, 40, 20);
+        listan2.setBorder(BorderFactory.createCompoundBorder(titledBorder, emptyBorder));
+        listan2.setBackground(new Color(30, 30, 30));
+
         add(listanscroll);
+        creatButtons();
     }
 
     private void creatButtons() {
@@ -95,14 +110,14 @@ public class AlarmsAndButtons extends JPanel {
             listan.setElementAt(style + ändrasTill + "</h1>", listan2.getSelectedIndex());
         });
 
-        butonspanel.add(add);
-        butonspanel.add(remove);
-        butonspanel.add(removeAll);
-        butonspanel.add(set);
-
+        butonspanel.add(styler(add));
+        butonspanel.add(styler(remove));
+        butonspanel.add(styler(removeAll));
+        butonspanel.add(styler(set));
+        butonspanel.setBackground(new Color(20, 100, 180));
         actions.add(butonspanel, BorderLayout.WEST);
         actions.add(creatOptions(), BorderLayout.EAST);
-        
+        actions.setBackground(new Color(20, 100, 180));
         this.add(actions, BorderLayout.NORTH);
     }
 
@@ -110,6 +125,8 @@ public class AlarmsAndButtons extends JPanel {
         tim = new JComboBox<Integer>();
         min = new JComboBox<Integer>();
         sek = new JComboBox<Integer>();
+        dag.setFont(new Font("Segoe UI", Font.BOLD, 12));
+
         IntStream.range(0, 24).forEach(i -> tim.addItem(i));
         IntStream.range(0, 60).forEach(i -> min.addItem(i));
         IntStream.range(0, 60).forEach(i -> sek.addItem(i));
@@ -118,6 +135,18 @@ public class AlarmsAndButtons extends JPanel {
         combopanel.add(tim);
         combopanel.add(min);
         combopanel.add(sek);
+        combopanel.setBackground(new Color(20, 100, 180));
         return combopanel;
     }
+
+    private JButton styler(JButton button) {
+        button.setFont(new Font("Segoe UI", Font.BOLD, 15));
+        button.setFocusPainted(false);
+        button.setBorderPainted(true);
+
+        button.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10)); // Padding
+        button.setOpaque(true);
+        return button;
+    }
+
 }

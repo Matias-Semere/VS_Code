@@ -15,6 +15,11 @@ public class MainController {
 
     public MainController(WeekAlarmClock connector) {
         WAC = connector;
+        tid = new Timer(1000, e -> WAC.tickTack());
+    }
+
+    public void startClock() {
+    tid.start();
     }
 
     public TimeType getRealTime() {
@@ -24,23 +29,6 @@ public class MainController {
 
     public  void setTime(TimeType time) {
         WAC.setTime(time);
-    }
-
-    public void setView(MainFrame view) {
-        this.view = view;
-        tid = new Timer(1000, e -> {WAC.tickTack(); view.repaintCAB();});
-    }
-
-    public void startTime() {
-        tid.start();
-    }
-
-    public void stopTime() {
-        tid.stop();
-    }
-
-    public String toString() {
-       return WAC.toString();
     }
         
 }
