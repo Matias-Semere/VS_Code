@@ -2,12 +2,9 @@ package lab3.view;
 
 import java.awt.*;
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.TitledBorder;
+import javax.swing.border.*;
 
 import java.util.stream.IntStream;
-
-import lab3.alarm.Alarm;
 import lab3.controller.*;
 import lab3.time.*;
 
@@ -16,7 +13,6 @@ public class AlarmsAndButtons extends JPanel {
     MainFrame parrent;
     AlarmController con;
 
-    JLabel alarm = new JLabel();
     JButton add = new JButton("Add");
     JButton remove = new JButton("Remove");
     JButton removeAll = new JButton("Remove All");
@@ -29,7 +25,8 @@ public class AlarmsAndButtons extends JPanel {
     JList<String> listan2;
     JScrollPane listanscroll;
 
-    String style = "<html><style> h1 {font-size: 25px; padding: 5px; color: green; font-weight: bold; border: 4px solid black;} div {display: flex; padding: 10px; justify-content: center; text-align: center; align-items: center; width: 100%; padding-left: 110px}</style> <div> <h1>";
+    String style = "<html><style> h1 {font-size: 25px; padding: 10px; color: rgb(20,100,200); font-weight: bold; border: 4px solid black;} div {padding-left: 120px;}</style> <div> <h1>";
+    String closer = "</h1></div></html>";
     String[] dagar = { "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun" };
     JComboBox<String> dag = new JComboBox<String>(dagar);
     JComboBox<Integer> tim, min, sek;
@@ -50,11 +47,11 @@ public class AlarmsAndButtons extends JPanel {
                 "Alarms",
                 TitledBorder.LEFT,
                 TitledBorder.TOP,
-                new Font("Segoe UI", Font.BOLD, 12)
+                new Font("Segoe UI", Font.BOLD, 12),
+                new Color(255, 255, 255)
         );
 
-        Border emptyBorder = BorderFactory.createEmptyBorder(20, 20, 40, 20);
-        listan2.setBorder(BorderFactory.createCompoundBorder(titledBorder, emptyBorder));
+        listan2.setBorder(titledBorder);
         listan2.setBackground(new Color(30, 30, 30));
 
         add(listanscroll);
@@ -63,7 +60,7 @@ public class AlarmsAndButtons extends JPanel {
 
     private void creatButtons() {
 
-        con.görDetta(() -> {
+        con.läggTillListan(() -> {
             this.repaint();
             this.revalidate();
             if (con.checkIfAlarm())
@@ -77,9 +74,9 @@ public class AlarmsAndButtons extends JPanel {
             if (con.getAlarm(tid) == null) {
                 con.addAlarm(tid);
 
-                String b = tid.toString() + con.toString(new Alarm(tid));
+                String b = tid.toString() + con.activeString(tid);
 
-                listan.addElement(style + b + "</h1>");
+                listan.addElement(style + b + closer);
             }
         });
 
@@ -99,15 +96,17 @@ public class AlarmsAndButtons extends JPanel {
         });
 
         set.addActionListener(e -> {
-            String temp = listan2.getSelectedValue();
+            String temp = listan2.getSelectedValue().trim();
             String[] str = temp.substring(temp.indexOf("<h1>") + 4, temp.indexOf("</h1>")).split(" ");
-            TimeType tid = new Time(str[0] + " " + str[1]);
-            if (str[2].equals("Aktiv"))
+            TimeType tid = new Time(str[0] + " " + str[1]);            
+            if (con.isActive(con.getAlarm(tid)))
                 con.setActive(tid, false);
             else
                 con.setActive(tid, true);
-            String ändrasTill = tid.toString() + con.toString(con.getAlarm(tid));
-            listan.setElementAt(style + ändrasTill + "</h1>", listan2.getSelectedIndex());
+
+            String ändrasTill = tid.toString() + con.activeString(tid);
+
+            listan.setElementAt(style + ändrasTill + closer, listan2.getSelectedIndex());
         });
 
         butonspanel.add(styler(add));
@@ -116,7 +115,9 @@ public class AlarmsAndButtons extends JPanel {
         butonspanel.add(styler(set));
         butonspanel.setBackground(new Color(20, 100, 180));
         actions.add(butonspanel, BorderLayout.WEST);
+
         actions.add(creatOptions(), BorderLayout.EAST);
+        
         actions.setBackground(new Color(20, 100, 180));
         this.add(actions, BorderLayout.NORTH);
     }
@@ -135,6 +136,7 @@ public class AlarmsAndButtons extends JPanel {
         combopanel.add(tim);
         combopanel.add(min);
         combopanel.add(sek);
+
         combopanel.setBackground(new Color(20, 100, 180));
         return combopanel;
     }

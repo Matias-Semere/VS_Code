@@ -1,7 +1,5 @@
 package lab3.controller;
 
-import java.util.*;
-
 import lab3.clock.*;
 import lab3.alarm.*;
 import lab3.time.*;
@@ -14,7 +12,7 @@ public class AlarmController {
         WAC = connector;
     }
 
-    public void görDetta(Runnable Detta) {
+    public void läggTillListan(Runnable Detta) {
         WAC.läggTillListan(Detta);
     }
 
@@ -30,14 +28,10 @@ public class AlarmController {
         WAC.removeAllAlarms();
     }
 
-    public Collection<AlarmType> getAlarmsFromWAC() {
-        return WAC.getAlarms();
-    }
-
     public AlarmType getAlarm(TimeType tid) {
-        if (getAlarmsFromWAC().size() == 0);
+        if (WAC.getAlarms().size() == 0);
         else {
-            for (AlarmType ettAlarm : getAlarmsFromWAC()) {
+            for (AlarmType ettAlarm : WAC.getAlarms()) {
                 if (ettAlarm.toString().equals(tid.toString()))
                     return ettAlarm;
             }
@@ -46,8 +40,7 @@ public class AlarmController {
     }
 
     public void setActive(TimeType tid, boolean aktiv) {
-        AlarmType alarm = getAlarm(tid);
-        if (alarm != null)
+        if (getAlarm(tid) != null)
             getAlarm(tid).setActive(aktiv);
     }
 
@@ -57,7 +50,8 @@ public class AlarmController {
         return false;
     }
 
-    public String toString(AlarmType alarm) {
+    public String activeString(TimeType tid) {
+        AlarmType alarm = getAlarm(tid);
         return isActive(alarm) ? " Aktiv" : " Inaktiv";
     }
 

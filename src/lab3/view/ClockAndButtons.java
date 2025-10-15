@@ -21,7 +21,7 @@ public class ClockAndButtons extends JPanel {
         setLayout(new BorderLayout());
         creatButtons(con);
 
-        Border emptyBorder = BorderFactory.createEmptyBorder(20, 20, 40, 20);
+        Border emptyBorder = BorderFactory.createEmptyBorder(20, 40, 40, 40);
 
         Border titledBorder = BorderFactory.createTitledBorder(
                 BorderFactory.createLineBorder(
@@ -29,7 +29,8 @@ public class ClockAndButtons extends JPanel {
                 "Digital",
                 TitledBorder.LEFT,
                 TitledBorder.TOP,
-                new Font("Segoe UI", Font.BOLD, 12)
+                new Font("Segoe UI", Font.BOLD, 12),
+                new Color(255, 255, 255)
         );
 
         JLabel label = new JLabel(con.toString());
@@ -63,13 +64,13 @@ public class ClockAndButtons extends JPanel {
                 "Analog",
                 TitledBorder.LEFT,
                 TitledBorder.TOP,
-                new Font("Segoe UI", Font.BOLD, 12)
+                new Font("Segoe UI", Font.BOLD, 12),
+                new Color(255, 255, 255)
         );
 
         analogclock.setBorder(BorderFactory.createCompoundBorder(titledBorder, emptyBorder));
 
-
-        add(analogclock, BorderLayout.SOUTH);
+        add(analogclock, BorderLayout.CENTER);
     }
 
     private JPanel creatOptions() {
@@ -110,6 +111,7 @@ public class ClockAndButtons extends JPanel {
             con.setTime(dag.getSelectedIndex(), tim.getSelectedIndex(), min.getSelectedIndex(), sek.getSelectedIndex());
         });
 
+        butonspanel.setPreferredSize(new Dimension(400, 52));
         butonspanel.add(styler(start));
         butonspanel.add(styler(stop));
         butonspanel.add(styler(reset));

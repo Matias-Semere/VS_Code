@@ -46,11 +46,11 @@ public class AnalogClock extends JPanel {
         ritaText(ritare, r);
         ritaSträck(ritare, r);
 
-        ritaVisare(ritare, r - 80, t.getHour(), 1);
+        ritaVisare(ritare, r - 120, t.getHour(), 1);
         ritare.setColor(Color.green);
-        ritaVisare(ritare, r - 60, t.getMinute(), 0);
+        ritaVisare(ritare, r - 100, t.getMinute(), 0);
         ritare.setColor(Color.red);
-        ritaVisare(ritare, r - 40, t.getSecond(), 0);
+        ritaVisare(ritare, r - 60, t.getSecond(), 0);
 
         clockc.SkickaVidare(() -> {
             revalidate();
